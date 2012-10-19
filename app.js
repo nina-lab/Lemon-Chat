@@ -68,8 +68,7 @@ app.listen(3000, function(){
 var sio = io.listen(app);
 
 sio.set("transports", ["xhr-polling"]);
-sio.set("close timeout", 20);
-sio.set("heartbeat interval", 10);
+sio.set("heartbeat interval", 2);
 
 sio.on('connection', function(client) {
 
@@ -107,6 +106,7 @@ sio.on('connection', function(client) {
 	client.on("disconnect", function () {
 		console.log("a client disconnected");
 		sio.sockets.sockets[client.id] = undefined;
+		client.send('partnerGone');
 	});
 });
 

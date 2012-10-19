@@ -49,6 +49,12 @@ function connect(team) {
 		}
 	});
 
+    socket.on('partnerGone', function() {
+        $('#sendbtn').attr('disabled', 'disabled');
+	$('#input').attr('disabled', 'disabled');
+        
+    });
+
 	// send message
 	$('#sendbtn').click(function() {
 		var msg = {u: window.user, message: $('#input').val()};
